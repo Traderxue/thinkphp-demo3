@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modle;
+namespace app\model;
 
 use think\Model;
 
 class User extends Model{
-    protected $tbale = "user";
+    protected $table = "user";
 }
