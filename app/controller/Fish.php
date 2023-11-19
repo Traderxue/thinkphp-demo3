@@ -70,7 +70,7 @@ class Fish extends BaseController
         $pageSize = $request->param("pageSize",10);
         $acting = $request->param("acting");        //所属的角色
         
-        $list = FishModel::where("acting","like",$acting)->paginate([
+        $list = FishModel::where("acting","like","%{$acting}%")->paginate([
             "page"=>$page,
             "list_rows"=>$pageSize
         ]);

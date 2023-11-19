@@ -60,4 +60,8 @@ Route::group("/wallet",function(){
     Route::get("/get/:u_id","wallet/getByUserId");
 
     Route::deleteById("/delete/:u_id","wallet/deleteById");
+
+    Route::post("/edit","wallet/edit");
+
+    Route::get("/page","wallet/page");
 });
