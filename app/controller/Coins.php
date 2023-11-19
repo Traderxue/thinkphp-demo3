@@ -51,13 +51,13 @@ class Coins extends BaseController
 
     function delete($id)
     {
-        $type = CoinsModel::where("id",$id)->field("coin_type")->find();
+        $type = CoinsModel::where("id", $id)->field("coin_type")->find();
 
         echo $type;
 
-        $wallet = WalletModel::where("type",$type["coin_type"])->find();
+        $wallet = WalletModel::where("type", $type["coin_type"])->find();
 
-        if($wallet){
+        if ($wallet) {
             return $this->result->error("该币种正在被使用，禁止删除");
         }
 

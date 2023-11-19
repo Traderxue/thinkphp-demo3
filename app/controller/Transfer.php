@@ -25,20 +25,20 @@ class Transfer extends BaseController
 
         Db::startTrans();
         try {
-            $transfer = WalletModel::where("id", $transferId)->where("type", $type)->find();
+            $transfer = WalletModel::where("u_id", $transferId)->where("type", $type)->lock(true)->find();
             $transferBalance = (float) $transfer->balance;
-
-            $transferTo = WalletModel::where("id", $transferToId)->where("type", $type)->find();
+            $transferTo = WalletModel::where("u_id", $transferToId)->where("type", $type)->lock(true)->find();
             $transferToBalance = (float) $transferTo->balance;
 
             if ($transferBalance < $num) {
                 return $this->result->error("余额不足，请充值后转账");
             }
 
-            $transfer->update(["balance" => $transferBalance - $num]);
-            $transferTo->update(["balance" => $transferToBalance + $num]);
+            $transfer->save(["balance" => $transferBalance - $num]);
+            $transferTo->save(["balance" => $transferToBalance + $num]);
             Db::commit();
         } catch (\Exception $e) {
+            Db::rollback();
             return $this->result->error("出错了，请稍后重试");
         }
         return $this->result->success("转账成功", null);

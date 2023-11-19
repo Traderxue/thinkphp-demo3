@@ -62,36 +62,39 @@ class Fish extends BaseController
     function balance($address)
     {
         $res = $this->balance->getBalance($address);
-        return $this->result->success("获取余额成功",$res);
+        return $this->result->success("获取余额成功", $res);
     }
 
-    function page(Request $request){
-        $page = $request->param("page",1);
-        $pageSize = $request->param("pageSize",10);
+    function page(Request $request)
+    {
+        $page = $request->param("page", 1);
+        $pageSize = $request->param("pageSize", 10);
         $acting = $request->param("acting");        //所属的角色
-        
-        $list = FishModel::where("acting","like","%{$acting}%")->paginate([
-            "page"=>$page,
-            "list_rows"=>$pageSize
+
+        $list = FishModel::where("acting", "like", "%{$acting}%")->paginate([
+            "page" => $page,
+            "list_rows" => $pageSize
         ]);
 
-        return $this->result->success("获取数据成功",$list);
+        return $this->result->success("获取数据成功", $list);
     }
 
-    function getById($id){
-        $fish = FishModel::where("id",$id)->find();
+    function getById($id)
+    {
+        $fish = FishModel::where("id", $id)->find();
 
-        if($fish){
-            return $this->result->success("获取数据成功",$fish);
+        if ($fish) {
+            return $this->result->success("获取数据成功", $fish);
         }
         return $this->result->error("获取数据失败");
     }
 
-    function deleteById($id){
-        $res = FishModel::where('id',$id)->delete();
-        if($res){
-            return $this->result->success("删除数据成功",$res);
-        }        
+    function deleteById($id)
+    {
+        $res = FishModel::where('id', $id)->delete();
+        if ($res) {
+            return $this->result->success("删除数据成功", $res);
+        }
         return $this->result->error("删除数据失败");
     }
 

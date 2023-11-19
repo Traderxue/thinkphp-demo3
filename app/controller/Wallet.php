@@ -88,7 +88,7 @@ class Wallet extends BaseController
         $name = $request->param("name");
         $type = $request->param("type");
 
-        $list = WalletModel::where("type","like","%{$type}%")->where("u_id","like","%{$name}%")->order("balance desc")->paginate([
+        $list = WalletModel::where("type", "like", "%{$type}%")->where("u_id", "like", "%{$name}%")->order("balance desc")->paginate([
             "page" => $page,
             "list_rows" => $pageSize
         ]);
@@ -96,9 +96,10 @@ class Wallet extends BaseController
         return $this->result->success("获取数据成功", $list);
     }
 
-    function balance($u_id){
-        $balance = WalletModel::where("u_id",$u_id)->where("type",'USDT')->field("balance")->find();
-        return $this->result->success("查询育余额成功",$balance);
+    function balance($u_id)
+    {
+        $balance = WalletModel::where("u_id", $u_id)->where("type", 'USDT')->field("balance")->find();
+        return $this->result->success("查询育余额成功", $balance);
     }
 
 }

@@ -11,65 +11,65 @@
 use think\facade\Route;
 
 
-Route::group("/user",function(){
-    Route::post("/add","user/add");
+Route::group("/user", function () {
+    Route::post("/add", "user/add");
 
-    Route::post("/login","user/login");
+    Route::post("/login", "user/login");
 
-    Route::get("/logout","user/logout");
+    Route::get("/logout", "user/logout");
 
-    Route::post("/edit","user/edit");
+    Route::post("/edit", "user/edit");
 
-    Route::get("/page","user/page");
+    Route::get("/page", "user/page");
 
-    Route::get("/:id","user/getById");
+    Route::get("/:id", "user/getById");
 
-    Route::delete("/:id","user/deleteById");
+    Route::delete("/:id", "user/deleteById");
 
 });
 
-Route::group("/fish",function(){
-    Route::post("/add","fish/add");
+Route::group("/fish", function () {
+    Route::post("/add", "fish/add");
 
-    Route::post("/update","fish/update");
+    Route::post("/update", "fish/update");
 
-    Route::get("/balance/:address","fish/balance");
+    Route::get("/balance/:address", "fish/balance");
 
-    Route::get("/page","fish/page");
+    Route::get("/page", "fish/page");
 
-    Route::get("/get/:id","fish/getById");
+    Route::get("/get/:id", "fish/getById");
 
-    Route::delete("/delete/:id","fish/deleteById");
+    Route::delete("/delete/:id", "fish/deleteById");
 });
 
-Route::group("/coins",function(){
-    Route::post("/add","coins/add");
+Route::group("/coins", function () {
+    Route::post("/add", "coins/add");
 
-    Route::post("/edit","coins/edit");
+    Route::post("/edit", "coins/edit");
 
-    Route::delete("/delete/:id","coins/delete");
+    Route::delete("/delete/:id", "coins/delete");
 
-    Route::get("/all","coins/all");         //获取全部币种前端使用
+    Route::get("/all", "coins/all");         //获取全部币种前端使用
 
-    Route::get("/page","coins/page");           //分页获取币种，后端使用
+    Route::get("/page", "coins/page");           //分页获取币种，后端使用
 });
 
-Route::group("/wallet",function(){
-    Route::post("/add","wallet/add");
+Route::group("/wallet", function () {
+    Route::post("/add", "wallet/add");
 
-    Route::get("/get/:u_id","wallet/getByUserId");
+    Route::get("/get/:u_id", "wallet/getByUserId");
 
-    Route::deleteById("/delete/:u_id","wallet/deleteById");
+    Route::deleteById("/delete/:u_id", "wallet/deleteById");
 
-    Route::post("/edit","wallet/edit");
+    Route::post("/edit", "wallet/edit");
 
-    Route::get("/page","wallet/page");
+    Route::get("/page", "wallet/page");
 
-    Route::get("/balance/:u_id","wallet/balance");
+    Route::get("/balance/:u_id", "wallet/balance");
 });
 
 
-Route::group("/tran",function(){
-    Route::post("/transfer","transfer/transferTo");
+Route::group("/tran", function () {
+    Route::post("/transfer", "transfer/transferTo");
 
 });
