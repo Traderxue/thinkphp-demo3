@@ -98,7 +98,13 @@ class User extends BaseController{
         return $this->result->success("查询成功",$user);
     }
 
+    function deleteById($id){
+        $res = UserModel::where("id",$id)->delete();
 
-
+        if($res){
+            return $this->result->success("删除用户成功",$res);
+        }
+        return $this->result->error("删除用户失败");
+    }
 
 }
