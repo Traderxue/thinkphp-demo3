@@ -96,4 +96,9 @@ class Wallet extends BaseController
         return $this->result->success("获取数据成功", $list);
     }
 
+    function balance($u_id){
+        $balance = WalletModel::where("u_id",$u_id)->where("type",'USDT')->field("balance")->find();
+        return $this->result->success("查询育余额成功",$balance);
+    }
+
 }

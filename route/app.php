@@ -64,4 +64,12 @@ Route::group("/wallet",function(){
     Route::post("/edit","wallet/edit");
 
     Route::get("/page","wallet/page");
+
+    Route::get("/balance/:u_id","wallet/balance");
+});
+
+
+Route::group("/tran",function(){
+    Route::post("/transfer","transfer/transferTo");
+
 });
