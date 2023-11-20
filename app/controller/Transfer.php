@@ -44,4 +44,35 @@ class Transfer extends BaseController
         return $this->result->success("转账成功", null);
     }
 
+    function transferCoin(Request $request){
+        $num = (float) $request->post("num");
+        $type = $request->post("type");
+        $transferId = $request->post("transferId");
+        $transferToId = $request->post("transferToId");
+
+        Db::startTrans();
+        try {
+            $transfer = WalletModel::where("u_id",$transferId)->where("type",$type)->lock(true)->find();
+            $transfer_amount = (float) $transfer->amount;
+
+            $transferTo = WalletModel::where("u_id",$transferToId)->where("type",$type)->lock(true)->find();
+            $transferTo_amount = (float) $transferTo->amount;
+
+            if($transfer_amount<$num){
+                return $this->result->error("余额不足，请充值后转账");
+            }
+
+            $transfer->save(["amount"=>$transfer_amount-$num]);
+            $transferTo->save(["amount"=>$transferTo_amount+$num]);
+
+            Db::commit();
+
+        } catch (\Throwable $th) {
+            Db::rollback();
+            return $this->result->error("出错了，请稍后重试");
+        }
+
+        return $this->result->success("转账成功",null);
+    }
+
 }

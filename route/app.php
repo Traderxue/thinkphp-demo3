@@ -72,4 +72,10 @@ Route::group("/wallet", function () {
 Route::group("/tran", function () {
     Route::post("/transfer", "transfer/transferTo");
 
+    Route::post("/transfer_coin","transfer/transferCoin");
+
+});
+
+Route::group("/file",function(){
+    Route::post("/upload","file/upload");
 });
